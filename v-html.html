@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>V-html</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        window.onload = function () {
+            new Vue({
+                el: "#root",
+                data: {
+                    msg: 'this is text',
+                    html: '<p>this is html</p>'
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+<div id="root">
+    <div v-text="msg">
+
+    </div>
+    <div v-html="html">
+
+    </div>
+</div>
+
+</body>
+</html>

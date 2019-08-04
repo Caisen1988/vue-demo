@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>VUE</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        window.onload = function () {
+            new Vue({
+                el: "#root",
+                data: {
+                    msg: 'hello world',
+                    age: 21,
+                    arr: ['aa', 'bb', 'cc'],
+                    obj: {name: 'abc', id: 12},
+                    lists: [
+                        {name: 'abc', id: 12},
+                        {name: 'abcd', id: 13},
+                        {name: 'abcdd', id: 14}
+                    ]
+                },
+                methods: {
+                    click1:function(){
+                        this.age = 99;
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+<div id="root">
+    <div>{{msg}}--{{age}}</div>
+    <ul>
+        <li v-for="(v,i) in arr">{{v}} -{{i}}</li>
+    </ul>
+    <ul>
+        <li v-for="(v,i) in obj">{{v}} -{{i}}</li>
+    </ul>
+    <ul>
+        <li v-for="(v,i) in obj">{{v}} -{{i}}</li>
+    </ul>
+    <ul>
+        <li v-for="(v,i) in lists">{{i}}-{{v.name}}-{{v.id}}</li>
+    </ul>
+    <button v-on:click="click1">click1</button>
+    <button v-show="age==18">age 是否等于18</button>
+    <!--使用if else-->
+    <p v-if="age == 18"> 等于18</p>
+    <p v-else-if="age==20">等于20</p>
+    <p v-else>不等于18 也不等于20</p>
+</div>
+</body>
+</html>

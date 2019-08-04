@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>V-html</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        window.onload = function () {
+            new Vue({
+                el: "#root",
+                data: {
+                    age: 18,
+                    cm: false,
+                    cms: [],
+                    radioV: [],
+                    items: [
+                        {text: '篮球', value: '0'},
+                        {text: '足球', value: '1'},
+                        {text: '排球', value: '2'},
+                    ],
+                    selected: 2
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+<div id="root">
+    <p>{{age}}</p>
+    <input type="text" v-model="age" :disabled="true">
+    <div>
+        <!--单个复选框-->
+        <input type="checkbox" v-model="cm"/>123{{cm}}
+    </div>
+    <div>
+        <!--多个复选框-->
+        <input type="checkbox" v-model="cms" value="0"/>老师
+        <input type="checkbox" v-model="cms" value="1"/>学生
+        <input type="checkbox" v-model="cms" value="2"/>家长
+        <p>user select {{cms}}</p>
+    </div>
+    <div>
+        <!--radio-->
+        <input type="radio" v-model="radioV" name="test" value="0">boy
+        <input type="radio" v-model="radioV" name="test" value="1">girl
+        <p>user select {{radioV}}</p>
+    </div>
+    <div>
+        <!--select-->
+        <select v-model="selected">
+            <option v-for="(v,i) in items" v-bind:value="v.value">
+            {{v.text}}
+            </option>
+        </select>
+        The User select the value {{selected}}
+    </div>
+</div>
+</body>
+</html>
