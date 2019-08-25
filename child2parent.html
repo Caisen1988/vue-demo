@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>VUE</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        window.onload = function () {
+            new Vue({
+                el: "#root",
+                components: {
+                    'my-parent': {
+                        template: "#parent",
+                        data() {
+                            return {
+                                pname: "parent",
+                                page: 50,
+                                cname: '',
+                                cage: ''
+                            }
+                        },
+                        methods: {
+                            handleSubData(name, age) {
+                                this.cname = name;
+                                this.cage = age;
+                            }
+                        },
+                        components: {
+                            'my-child': {
+                                template: "#child",
+                                data() {
+                                    return {
+                                        cname: "child",
+                                        cage: 20
+                                    }
+                                },
+                                props: ['ppname', 'ppage'],
+                                methods: {
+                                    sendMsg() {
+                                        //发送事件及参数
+                                        this.$emit('e-child', this.cname, this.cage)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            })
+        }
+    </script>
+    <template id="parent">
+        <div>
+            <h3>我是父组件，姓名{{pname}} 年龄{{page}}</h3>
+            <h3>我是父组件，接受子的数据，姓名--{{cname}}， 年龄--{{cage}}</h3>
+            <my-child :ppname="pname" :ppage="page" v-on:e-child="handleSubData"></my-child>
+        </div>
+    </template>
+    <template id="child">
+        <div>
+            <h3>我是子组件，访问父组件的数据 姓名：{{ppname}}， 年龄：{{ppage}}</h3>
+            <h3>我是子组件，姓名{{cname}} 年龄{{cage}}</h3>
+            <button @click="sendMsg">发送数据给父组件</button>
+        </div>
+    </template>
+</head>
+
+<body>
+    <div id="root">
+        <my-parent></my-parent>
+    </div>
+</body>
+</html>

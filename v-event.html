@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tab</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        window.onload = function () {
+            new Vue({
+                el: "#root",
+                data: {
+
+                },
+                methods: {
+                    showA:function(){
+                        console.log("aaaaa");
+                    },
+                    showB:function(){
+                        console.log("bbbbb");
+                    },
+                    showC:function(){
+                        console.log("ccccc");
+                    }
+                }
+            })
+        }
+    </script>
+    <style>
+        .a{
+            border: #f60 solid 1px;
+            width: 300px;
+        }
+        .b{
+            border: #f60 solid 1px;
+            width: 200px;
+        }
+        .c{
+            border: #f60 solid 1px;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+<div id="root">
+    <!--阻止事件冒泡-->
+    <div @click="showA()" class="a">A
+        <div @click="showB()" class="b">B
+            <div @click="showC()" class="c">C</div>
+            <div @click.stop="showC()" class="c">c stop</div>
+        </div>
+    </div>
+    <!--阻止默认事件-->
+    <a href="www.baidu.com" @click="showA()">clickA</a>
+    <a href="www.baidu.com" @click.prevent="showA()">clickB</a>
+    <!--只执行一次 addEvent removeEvent-->
+    <button @click.once="showB()">once</button>
+</div>
+</body>
+</html>

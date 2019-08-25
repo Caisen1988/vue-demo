@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>VUE</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        window.onload = function () {
+            new Vue({
+                el: "#root",
+                data: {
+                    parentmsg: "hello parent"
+
+                },
+                methods: {
+
+                },
+                components: {
+                    'my-address': {
+                        template: "#myAddress",
+                        data: function () {
+                            return {
+                                title: 'title',
+                                lists: [1, 2, 3, 4, 5]
+                            }
+                        },
+                        props: ['childmsg'] //父到子
+                    }
+                }
+            })
+        }
+    </script>
+    <template id="myAddress">
+        <div>
+            <p>{{title}}--------{{childmsg}}</p>
+            <ul>
+                <li v-for="(v,i) in lists">{{v}}</li>
+            </ul>
+        </div>
+    </template>
+</head>
+
+<body>
+    <div id="root">
+        <my-address :childmsg="parentmsg"></my-address>
+    </div>
+</body>
+
+</html>
