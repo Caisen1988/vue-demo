@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>VUE</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        window.onload = function () {
+            let Bus = new Vue();
+            let A = {
+                template: "#myA",
+                data() {
+                    return {
+                        name: "AAAAA",
+                    }
+                },
+                methods: {
+                    send() {
+                        Bus.$emit('data-a', this.name);
+                    }
+                }
+            }
+            let B = {
+                template: "#myB",
+                data() {
+                    return {
+                        name: "BBBBBB",
+                    }
+                },
+                methods: {
+                    send() {
+                        Bus.$emit('data-b', this.name);
+                    }
+                }
+            }
+            let C = {
+                template: "#myC",
+                //组件生命周期
+                data() {
+                    return {
+                        nameA: '',
+                        nameB: '',
+                    }
+                },
+                mounted() {
+                    Bus.$on('data-a', function (name) {
+                        //this===Vue
+                        this.name = name;
+                    })
+                    Bus.$on('data-a',name=>{
+                        this.nameA = name;
+                    })
+                    Bus.$on('data-b',name=>{
+                        this.nameB = name;
+                    })
+                }
+            }
+            new Vue({
+                el: "#root",
+                components: {
+                    'my-a': A,
+                    'my-b': B,
+                    'my-c': C,
+                }
+            })
+        }
+    </script>
+    <template id="myA">
+        <div>
+            <h3>组件A:{{name}}</h3>
+            <button @click="send">数据发送给C</button>
+        </div>
+
+    </template>
+    <template id="myB">
+        <div>
+            <h3>组件B{{name}}</h3>
+            <button @click="send">数据发送给C</button>
+        </div>
+    </template>
+    <template id="myC">
+        <div>
+            <h3>组件C 接收: {{nameA}},{{nameB}}</h3>
+        </div>
+    </template>
+</head>
+
+<body>
+    <div id="root">
+        <my-a></my-a>
+        <my-b></my-b>
+        <my-c></my-c>
+    </div>
+</body>
+
+</html>

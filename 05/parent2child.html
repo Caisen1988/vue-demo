@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>艾梯哎--父到子</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        window.onload=function(){
+            Vue.component('my-world', {
+                template:'<h2>my world {{name}}, {{msg}}</h2>',
+                data: function(){
+                    return {
+                        msg:'111'
+                    }
+                },
+                props:['name'] //父到子
+            })
+            new Vue({
+                el:"#root",
+                data:{
+                    msg:"hello parent",
+                    name:'艾梯哎'
+                },
+                components:{
+                    'my-address':{
+                        template:"#myAddress",
+                        data:function(){
+                            return {
+                                title:'title',
+                                list:[1,2,3,4,5]
+                            }
+                        },
+                        props:['msg']  //父到子
+                    }
+                }
+            })
+        }
+    </script>
+    <template id="myAddress">
+        <div>
+            <p>{{title}}---{{msg}}</p>
+            <ul>
+                <li v-for="(v,i) in list">{{v}}</li>
+            </ul>
+        </div>
+    </template>
+</head>
+<body>
+    <div id="root">
+        <my-address :msg="msg"></my-address>
+        <my-world :name="name"></my-world>
+    </div>
+</body>
+</html>

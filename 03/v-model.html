@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>艾梯哎--v-model</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+    window.onload=function(){
+        new Vue({
+            el:"#root",
+            data:{
+                msg:'hello iti',
+                age: 23,
+                che: false,
+                arr:[],
+                radioV:'',
+                html:"<p>1111</p>",
+                items: [
+                    {text:'跳舞', value:'0'},
+                    {text:'游戏', value:'1'},
+                    {text:'唱歌', value:'2'}
+                ],
+                selected: '2'
+            }
+        })
+    }
+    </script>
+</head>
+<body>
+    <div id="root">
+        <p>{{age}}</p>
+        <input type="text" v-model="age" :disabled="age==20" />
+        <div>
+            <!--单个复选框-->
+            <input type="checkbox" v-model="che" />123{{che}}
+            <!--多个复选框-->
+            <input type="checkbox" v-model="arr" value="0"/> 老师
+            <input type="checkbox" v-model="arr" value="1"/> 学生
+            <input type="checkbox" v-model="arr" value="2"/> 家长
+            {{arr}}
+        </div>
+        <div>
+            <input type="radio" v-model="radioV" name="test" value="0"> 男
+            <input type="radio" v-model="radioV" name="test" value="1"> 女
+            {{radioV}}
+        </div>
+        <div>
+            <select v-model="selected">
+                <option v-for="(v, i) in items" v-bind:value="v.value">{{v.text}}</option>
+            </select>
+            {{selected}}
+        </div>
+    </div>
+</body>
+</html>

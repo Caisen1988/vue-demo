@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>艾梯哎--生命周期</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        window.onload=function(){
+            new Vue({
+                el:"#root",
+                data:{
+                    msg:'生命周期'
+                },
+                methods:{
+                    update(){
+                        this.msg="组件更新";
+                    },
+                    destroy(){
+                        this.$destroy();
+                    }
+                },
+                //创建前
+                beforeCreate(){
+                    console.log('beforeCreate...')
+                },
+                //创建后
+                created(){
+                    console.log('created...')
+                },
+                //装载前
+                beforeMount(){
+                    console.log('beforeMount...')
+                },
+                //装载后
+                mounted(){
+                    console.log('mounted...')
+                },
+                //更新前
+                beforeUpdate(){
+                    console.log('beforeUpdate...')
+                },
+                //更新后
+                updated(){
+                    console.log('updated...')
+                },
+                //销毁前
+                beforeDestroy(){
+                    console.log('beforeDestroy')
+                },
+                //销毁后
+                destroyed(){
+                    console.log('destroyed')
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <div id="root">
+        {{msg}}
+        <button @click="update">update</button>
+        <button @click="destroy">destroy</button>
+    </div>
+</body>
+</html>

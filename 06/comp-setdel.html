@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>艾梯哎--set-delete</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        window.onload=function(){
+            new Vue({
+                el:"#root",
+                data:{
+                    name:"iti",
+                    address:{
+                        id:11,
+                        name:'武汉光谷'
+                    }
+                },
+                methods:{
+                    add(){
+                        console.log('add...')
+                        // this.address.city='江夏';
+                        this.$set(this.address, 'city', '江夏');
+                    },
+                    update(){
+                        this.address.city='洪山';
+                    },
+                    del(){
+                        this.$delete(this.address, 'city');
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <div id="root">
+        {{name}}
+        {{address.name}}
+        {{address.city}}
+        <button @click="add">add attr</button>
+        <button @click="update">update attr</button>
+        <button @click="del">delete attr</button>
+    </div>
+</body>
+</html>

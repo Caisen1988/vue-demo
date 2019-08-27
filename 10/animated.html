@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>艾梯哎--animated</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+    <script>
+        window.onload=function(){
+            new Vue({
+                el:"#root",
+                data:{
+                    flag:false
+                },
+                methods:{
+                    beforeEnter(el){
+                        console.log('动画进入之前',el)
+                        el.style.background='red'
+                    },
+                    enter(){
+                        console.log('动画进入中')
+                    },
+                    afterEnter(el){
+                        console.log('动画进入之后')
+                        el.style.background='blue'
+                    },
+                    beforeLeave(el){
+                        el.innerHTML='我要离开了'
+                        console.log('动画离开之前')
+                    },
+                    leave(){
+                        console.log('动画离开中')
+                    },
+                    afterLeave(){
+                        console.log('动画离开之后')
+                    }
+                }
+            })
+        }
+    </script>
+    <style>
+        .div1{
+            font-size: 40px;
+            text-align: center;
+        }
+        .fade-enter-active {
+            transition: all 3s ease;
+        }
+        .fade-leave-active {
+            transition: all 3s ease;
+        }
+        .fade-leave-active {
+            opacity: 0;
+            width: 300px;
+            height: 10px;
+        }
+        .fade-enter{
+            opacity: 0;
+            width: 10px;
+            height: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <button @click="flag=!flag">动画</button>
+        <!--结合animate.css样式库-->
+        <transition enter-active-class="animated jello" leave-active-class="animated zoomOutLeft">
+            <div class="div1" v-show="flag">显示动画</div>
+        </transition>
+        <!--vue 利用钩子函数-->
+        <transition name="fade" @before-enter="beforeEnter"
+            @enter="enter"
+            @after-enter="afterEnter"
+            @before-leave="beforeLeave"
+            @leave="leave"
+            @after-leave="afterLeave">
+            <div class="div1" v-show="flag">显示动画2</div>
+        </transition>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>艾梯哎--computer</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        window.onload=function(){
+            new Vue({
+                el: "#root",
+                data:{
+                    shopcart:[
+                        {name:"商品A", price: 15, count:2},
+                        {name:"商品B", price: 13, count:3}
+                    ],
+                    allPrice:0,
+                    num1: 100,
+                    num2: 100,
+                },
+                methods:{
+                    //计算购物车价格
+                    countPrice(){
+                        this.shopcart.forEach((el, index)=>{
+                            this.allPrice += el.price*el.count;
+                        })
+                    },
+                    //更新购物车商品数量，查看计算属性是否更新
+                    changeShop(){
+                        this.shopcart[0].count++;
+                    },
+                    setComputedValue(){
+                        this.num1 = 222;
+                    }
+                },
+                computed:{
+                    //计算属性
+                    countPrice2(){
+                        var price = 0;
+                        this.shopcart.forEach((el, index)=>{
+                            price += el.price*el.count;
+                        })
+                        return price;
+                    },
+                    countPrice3(){
+                        // map ==> array
+                        // reduce
+                        return this.shopcart.reduce((total, v) => {
+                            return total+v.price*v.count;
+                        }, 0)
+                    },
+                    //修改计算属性
+                    num:{
+                        get:function(){
+                            return this.num1+this.num2;
+                        },
+                        set:function(val){
+                            console.log('set', val)
+                            this.num1 = 333;
+                        }
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <div id="root">
+        <p>商品列表及价格：</p>
+        <ul>
+            <li v-for="(v,i) in shopcart">
+                名称：{{v.name}} 价格:{{v.price}} 数量:{{v.count}}
+            </li>
+        </ul>
+        <p>总价：</p><p>{{countPrice3}}</p>
+        <p>修改数值：{{num}}</p>
+        <button @click="changeShop">changeShop</button>
+        <button @click="setComputedValue">setComputedValue</button>
+    </div>
+</body>
+</html>

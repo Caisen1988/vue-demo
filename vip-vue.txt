@@ -1,0 +1,27 @@
+弹出：
+diskutil list--查找要弹出的磁盘
+sudo diskutil unmountdisk /dev/disk4
+
+
+1.vue2简介 入门实例
+2.v-for
+3.v-bind
+4.防闪烁指令+v-model
+5.tab
+6.event
+7.keydown keyup+filter
+8.component 创建1
+9.component 创建2
+10.component 父子通信
+11.component 非父子通信
+12.组件生命周期 实例set del
+13.购物车扩展1
+14.购物车扩展2
+15.watch
+16.computer
+17.transition
+18.路由
+19.路由2
+20.脚手架
+21.状态管理器  全局组件
+22.状态管理器优化

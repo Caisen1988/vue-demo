@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>艾梯哎--v-html</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+    window.onload=function(){
+        new Vue({
+            el:"#root",
+            data:{
+                msg:'hello iti',
+                age: 23,
+                html:"<p>1111</p>"
+            }
+        })
+    }
+    </script>
+    <style>
+        /*必须要配置样式*/
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <div v-cloak>{{msg}} -- {{age}}</div>
+        <div v-text="msg"></div>
+        <div v-html="html"></div>
+    </div>
+</body>
+</html>

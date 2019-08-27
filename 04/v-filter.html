@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>艾梯哎--v-filter</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        window.onload=function(){
+            //全局指令
+            Vue.filter("addZero", function(num){
+                return num<10 ? '0'+num : num;
+            })
+            new Vue({
+                el: "#root",
+                data: {
+                    curTime:'1537073922'
+                },
+                filters:{
+                    //数字保留几位小数
+                    number: function(num, n=2){
+                        return num.toFixed(n);
+                    },
+                    //格式化时间戳
+                    date(data){
+                        let d = new Date(data*1000);
+                        return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <div id="root">
+        <div>{{10 | addZero}}</div>
+        <!--过滤器参数-->
+        <div>{{3.1415926 | number(1)}}</div>
+        <div>{{curTime | date}}</div>
+    </div>
+</body>
+</html>

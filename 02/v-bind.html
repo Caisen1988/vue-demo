@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>艾梯哎--v-bind</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        window.onload=function(){
+            new Vue({
+                el: '#root',
+                data:{
+                    title:'图片',
+                    flag: true,
+                    flag2: false,
+                    a1: 'a1',
+                    a2: 'a2',
+                    a3: 'a3',
+                    a4: {color:'#000'},
+                    a5: {color:'#f00'},
+                    url:'https://cn.vuejs.org/images/logo.png',
+                    url2:''
+                }
+            })
+        }
+    </script>
+    <style>
+    .a1 {
+        color: red;
+        font-size: 25px;
+        border: 1px solid #f60;
+        background: #f60;
+    }
+    .a2 {
+        background: blue;
+    }
+    .a3 {
+        color: blue;
+    }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <img v-bind:src="url" width="100" height="100" :title="title">
+        <img v-bind:src="flag?url:url2" width="100" height="100" :title="title">
+        <!--单个引用-->
+        <div :class="a1">11223344</div>
+        <!--多个引用  后面的会覆盖前面的-->
+        <div :class="[a1, a2]">55566677888</div>
+        <!--通过bool值判断样式-->
+        <div :class="{'a3':flag2}">9999999</div>
+
+        <div :style="{color: 'red',background: '#f60'}">adfsdfdf</div>
+        <div :style="a4">adfasdfadsfasdf</div>
+        <div :style="[a4, a5]">asdfadf</div>
+
+        <!--三目运算-->
+        <div :class="flag? a1: a2">sdasdasdasd</div>
+        <div :style="flag? a4: a5">lkjklkjlkj</div>
+    </div>
+</body>
+</html>

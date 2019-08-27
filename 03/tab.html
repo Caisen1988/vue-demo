@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>艾梯哎--tab</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        window.onload=function(){
+            new Vue({
+                el:"#root",
+                data:{
+                    cur: 1,
+                    tabTitle: ['标题一','标题二','标题三'],
+                    tabContent: ['内容一','内容二','内容三'],
+                    cur2: 1
+                }
+            })
+        }
+    </script>
+    <style>
+        ul, li {
+            padding: 0; margin: 0;
+        }
+        .tab-tit li {
+            padding: 10px 15px;
+            text-align: center;
+            list-style: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+        .tab-tit .active {
+            color: #09f;
+            border-bottom: 1px solid #09f;
+        }
+        .tab-con div{
+            margin: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <ul class="tab-tit">
+            <li @click="cur=0" :class="{active:cur==0}">标题一</li>
+            <li @click="cur=1" :class="{active:cur==1}">标题二</li>
+            <li @click="cur=2" :class="{active:cur==2}">标题三</li>
+        </ul>
+        <div class="tab-con">
+            <div v-show="cur==0">内容一</div>
+            <div v-show="cur==1">内容二</div>
+            <div v-show="cur==2">内容三</div>
+        </div>
+
+        <!--动态实现-->
+        <ul class="tab-tit">
+            <li v-for="(v,i) in tabTitle" @click="cur2=i" :class="{active:cur2==i}">{{v}}</li>
+        </ul>
+        <div>
+            <div v-for="(v,i) in tabContent" v-show="cur2===i">{{v}}</div>
+        </div>
+    </div>
+</body>
+</html>
